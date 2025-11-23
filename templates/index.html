@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>Bird AI 辨識</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #f4f7f6;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+
+        button {
+            background: #388e3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #2e7030;
+        }
+
+        img {
+            margin-top: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .top1 {
+            font-size: 40px;
+            font-weight: bold;
+            color: #1565c0;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style: square;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌿 Bird AI 辨識系統</h1>
+        <p>上傳一張鳥類照片，AI 會告訴你牠是誰 🐦</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <br>
+            <button type="submit">🚀 開始辨識</button>
+        </form>
+
+        {% if img_path %}
+            <div class="result">
+                <h3>🖼️ 上傳圖片</h3>
+                <img src="{{ img_path }}" alt="Uploaded Image" width="300">
+
+                <p class="top1">🏆 Top1：{{ prediction }} <span>（{{ confidence }}）</span></p>
+
+                <h4>📊 Top3 預測</h4>
+                <ul>
+                    {% for cls, conf in top3 %}
+                        <li>{{ cls }}（{{ "%.2f" | format(conf) }}%）</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <div class="footer">由鳥類影像辨識模型提供 · Powered by TensorFlow</div>
+    </div>
+</body>
+</html>
