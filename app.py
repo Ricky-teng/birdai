@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 # 確保 static 資料夾存在
 os.makedirs("static", exist_ok=True)
 
-MODEL_PATH = os.path.join("model", "efficientnetv2s_best.h5")
+MODEL_PATH = os.path.join("model", "efficientnetv2s_best_tf210.h5")
 IMG_SIZE = (300, 300)
 
 # 英文學名對應中文
