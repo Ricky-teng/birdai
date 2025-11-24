@@ -106,7 +106,8 @@ BIRD_NAME_MAP = {
 }
 
 app = Flask(__name__)
-model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+
+model = tf.keras.models.load_model(MODEL_PATH, compile=False, safe_mode=False)
 
 @app.route("/", methods=["GET", "POST"])
 def upload_predict():
